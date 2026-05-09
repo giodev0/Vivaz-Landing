@@ -86,7 +86,7 @@ nav {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('assets/hero-bg.jpg');
+  background-image: url('assets/herogran.JPG');
   background-size: cover;
   background-position: center 30%;
   opacity: 0.5;
@@ -533,23 +533,48 @@ section { padding: 100px 60px; }
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
-  group: true;
+  background: var(--navy-light);
 }
 
-.portfolio-card.tall { grid-row: span 2; }
+.portfolio-card.tall { 
+  grid-row: span 2; 
+}
 
-.portfolio-card-img {
+/* ─── PORTFOLIO CAROUSEL ─── */
+.portfolio-card-images {
+  position: relative;
   width: 100%;
   height: 100%;
   min-height: 240px;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 
-.portfolio-card.tall .portfolio-card-img { min-height: 530px; }
+.portfolio-card.tall .portfolio-card-images {
+  min-height: 530px;
+}
 
-.portfolio-card:hover .portfolio-card-img { transform: scale(1.06); }
+.portfolio-card-images img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+}
+
+.portfolio-card-images img:first-child {
+  opacity: 1;
+}
+
+.portfolio-card-images img.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.portfolio-card:hover .portfolio-card-images img.active {
+  transform: scale(1.06);
+}
 
 .portfolio-card-overlay {
   position: absolute;
@@ -561,15 +586,19 @@ section { padding: 100px 60px; }
   padding: 28px;
   opacity: 0;
   transition: opacity 0.35s;
+  z-index: 2;
 }
 
 .portfolio-card:hover .portfolio-card-overlay { opacity: 1; }
 
 .portfolio-card-bottom {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0; 
+  left: 0; 
+  right: 0;
   padding: 20px 24px;
   background: linear-gradient(to top, rgba(13,17,32,0.85) 0%, transparent 100%);
+  z-index: 2;
 }
 
 .portfolio-card-title {
@@ -596,7 +625,9 @@ section { padding: 100px 60px; }
   transition: transform 0.35s;
 }
 
-.portfolio-card:hover .portfolio-card-overlay-content { transform: translateY(0); }
+.portfolio-card:hover .portfolio-card-overlay-content { 
+  transform: translateY(0); 
+}
 
 .portfolio-card-cta {
   display: inline-flex;
@@ -614,8 +645,9 @@ section { padding: 100px 60px; }
   transition: all 0.35s;
 }
 
-.portfolio-card:hover .portfolio-card-cta { transform: translateY(0); }
-
+.portfolio-card:hover .portfolio-card-cta { 
+  transform: translateY(0); 
+}
 /* ─── OBRAS ENTREGUES ─── */
 .obras {
   background: var(--off-white);

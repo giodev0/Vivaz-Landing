@@ -38,3 +38,31 @@ document.querySelector('.form-submit').addEventListener('click', () => {
     btn.style.color = '';
   }, 3000);
 });
+/*ALTERAÇÕES PRA PROJ AQQ*/
+
+// Portfolio image carousel on hover
+document.querySelectorAll('.portfolio-card').forEach(card => {
+  const images = card.querySelectorAll('.portfolio-card-images img');
+  let currentIndex = 0;
+  let interval;
+
+  if (images.length > 1) {
+    card.addEventListener('mouseenter', () => {
+      interval = setInterval(() => {
+        images[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % images.length;
+        images[currentIndex].classList.add('active');
+      }, 1200); // Troca a cada 1.2 segundos
+    });
+
+    card.addEventListener('mouseleave', () => {
+      clearInterval(interval);
+      images[currentIndex].classList.remove('active');
+      currentIndex = 0;
+      images[0].classList.add('active');
+    });
+
+    // Primeira imagem ativa
+    images[0].classList.add('active');
+  }
+});
