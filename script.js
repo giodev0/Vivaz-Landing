@@ -1,4 +1,4 @@
-// Scroll animations
+// ─── ANIMÃÇÕES DE SCROLL (FADE IN) ───
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -9,12 +9,7 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-// Staggered children
-document.querySelectorAll('.fade-in').forEach((el, i) => {
-  el.style.transitionDelay = `${(i % 4) * 0.12}s`;
-});
-
-// Nav scroll effect
+// ─── EFEITO DA NAVBAR AO ROLAR ───
 window.addEventListener('scroll', () => {
   const nav = document.querySelector('nav');
   if (window.scrollY > 60) {
@@ -26,43 +21,43 @@ window.addEventListener('scroll', () => {
   }
 });
 
-// Form submit
-document.querySelector('.form-submit').addEventListener('click', () => {
-  const btn = document.querySelector('.form-submit');
-  btn.textContent = '✓ Mensagem Enviada!';
-  btn.style.background = '#22c55e';
-  btn.style.color = '#fff';
-  setTimeout(() => {
-    btn.textContent = 'Enviar Mensagem →';
-    btn.style.background = '';
-    btn.style.color = '';
-  }, 3000);
-});
-/*ALTERAÇÕES PRA PROJ AQQ*/
-
-// Portfolio image carousel on hover
+// ─── CARROSSEL DE FOTOS NO PORTFÓLIO ───
 document.querySelectorAll('.portfolio-card').forEach(card => {
   const images = card.querySelectorAll('.portfolio-card-images img');
   let currentIndex = 0;
   let interval;
 
   if (images.length > 1) {
-    card.addEventListener('mouseenter', () => {
+    // Garante que a primeira imagem comece ativa
+    images[0].classList.add('active');
+
+    const startCarousel = () => {
+      // Evita criar múltiplos intervalos se já estiver rodando
+      if (interval) clearInterval(interval); 
+      
       interval = setInterval(() => {
         images[currentIndex].classList.remove('active');
         currentIndex = (currentIndex + 1) % images.length;
         images[currentIndex].classList.add('active');
-      }, 1200); // Troca a cada 1.2 segundos
-    });
+      }, 1200);
+    };
 
-    card.addEventListener('mouseleave', () => {
+    const stopCarousel = () => {
       clearInterval(interval);
-      images[currentIndex].classList.remove('active');
+      images.forEach(img => img.classList.remove('active'));
       currentIndex = 0;
       images[0].classList.add('active');
-    });
+    };
 
-    // Primeira imagem ativa
-    images[0].classList.add('active');
+    // Eventos para Computador (Mouse)
+    card.addEventListener('mouseenter', startCarousel);
+    card.addEventListener('mouseleave', stopCarousel);
+
+    // Eventos para Celular (Toque)
+    // No mobile, as fotos trocam enquanto o usuário mantém o dedo pressionado
+    card.addEventListener('touchstart', startCarousel, { passive: true });
+    card.addEventListener('touchend', stopCarousel);
   }
 });
+
+// Nota: A parte do 'form-submit' foi removida pois o formulário foi substituído pelo Mapa.
