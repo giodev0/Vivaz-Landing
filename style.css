@@ -162,6 +162,8 @@ nav {
   display: block;
 }
 
+
+
 .hero-sub {
   font-size: 17px;
   color: rgba(255,255,255,0.65);
@@ -817,11 +819,12 @@ section { padding: 100px 60px; }
 /* ─── CONTATO ─── */
 .contato {
   background: var(--cream);
-  padding: 100px 60px;
+  padding: 140px 60px 100px; /* Aumentamos o primeiro número (topo) de 100px para 140px */
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
+  scroll-margin-top: 90px; /* Cria uma "folga" pro menu fixo quando você clica nos links do menu */
 }
 
 .contato-info .section-title { margin-bottom: 20px; }
